@@ -14,17 +14,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->comment('会員テーブル');
+        Schema::create('posts', function (Blueprint $table) {
+            $table->comment('ポストテーブル');
 
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->comment('ユーザーテーブルのID参照');
 
-            $table->string('user_name')->unique();
-            $table->string('email')->unique();
-            $table->dateTime('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();    
-            
+            $table->string('title')->comment('ポストのタイトル');
+            $table->string('content')->comment('ポストの内容');
+
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('deleted_at')->nullable();
@@ -36,8 +34,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down():void
+    public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('posts');
     }
 };

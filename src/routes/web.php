@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::middleware('guest')->group(function(){
+    Route::get('/register', [UserController::class, 'showRegister'])->name('register');
+    Route::post('/register', [UserController::class, 'register']);
+    Route::get('/verify', [UserController::class, 'verify'])->name('verify');
+    
+    Route::get('/mail', [UserController::class, 'send']);
+
+    Route::get('/login', [UserController::class, 'showLogin'])->name('login');
+    Route::post('/login', [UserController::class, 'login']);
+});
+    
+Route::middleware('auth')->group(function(){
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('logout', [UserController::class, 'logout'])->name('user.logout');
+
+    Route::get('/index', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 });
