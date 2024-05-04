@@ -20,3 +20,6 @@ mk-mdl:
 
 mk-req:
 	@docker compose exec -u1000:1000 app php artisan make:request $(req)
+
+push:
+	@git push origin main

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User; 
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\VerifyRequest;
 use App\Http\Requests\User\LoginRequest;
@@ -77,7 +76,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('posts.index');
+            return redirect()->intended(route('posts.index'));
         }
 
         return back();

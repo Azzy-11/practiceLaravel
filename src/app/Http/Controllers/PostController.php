@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Requests\Post\StoreRequest;
 
 class PostController extends Controller
 {
@@ -22,7 +22,32 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        dd($post);
-        return view('post.show', compact('post'));
+        return view('posts.show', compact('post'));
+    }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    public function store(StoreRequest $request)
+    {
+                /**
+         * @var User $user
+         */
+        $user = Auth::user();
+        /*
+        Post::query()->create([
+            'user_id' => $user->id,
+            'title' => $request->getPostTitle(),
+            'content' => $request->getPostContent(),
+        ]);*/
+        $post = new Post();
+        $post->title = $request->getPostTitle();
+        $post->content = $request->getPostContent();
+        $post->user_id = $user->id;
+        $post->save();
+
+        return redirect()->route('posts.index')->with('flash_message', '投稿が完了しました。');
     }
 }
