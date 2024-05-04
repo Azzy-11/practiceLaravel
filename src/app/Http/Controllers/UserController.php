@@ -41,9 +41,8 @@ class UserController extends Controller
         $user = User::query()->where('verify_token', $request->getVerifyToken())->first();
 
         if($user) {
-            $user->update([
-                'email_verified_at' => Carbon::now(),
-            ]);
+            $user->email_verified_at = Carbon::now();
+            $user->save();
         }
 
         return redirect()->route('login');
@@ -78,7 +77,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('profile');
+            return redirect()->intended('posts.index');
         }
 
         return back();

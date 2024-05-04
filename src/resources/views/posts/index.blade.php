@@ -14,9 +14,9 @@
 
             <ul>
                 <li>
-                    <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
                     <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
                         @csrf
+                        <a href="" onclick="event.preventDefault(); document.querySelector('#logout-form').submit();">ログアウト</a>
                     </form>
                 </li>
             </ul>
