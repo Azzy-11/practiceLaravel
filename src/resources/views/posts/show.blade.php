@@ -1,41 +1,40 @@
-+<!DOCTYPE html>
-+<html lang="ja">
-+
-+<head>
-+    <meta charset="UTF-8">
-+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-+    <title>投稿詳細 | Meower</title>
-+</head>
-+
-+<body>
-+    <header>
-+        <nav>
-+            <a href="{{ route('posts.index') }}">投稿アプリ</a>
-+
-+            <ul>
-+                <li>
-+                    <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
-+                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
-+                        @csrf
-+                    </form>
-+                </li>
-+            </ul>
-+        </nav>
-+    </header>
-+
-+    <main>
-+        <h1>投稿詳細</h1>
-+        <a href="{{ route('posts.index') }}">&lt; 戻る</a>
-+
-+        <article>
-+            <h2>{{ $post->title }}</h2>
-+            <p>{{ $post->content }}</p>
-+        </article>
-+    </main>
-+
-+    <footer>
-+        <p>&copy; 投稿アプリ All rights reserved.</p>
-+    </footer>
-+</body>
-+
-+</html>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿詳細 | Meower</title>
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+</head>
+
+<body>
+  <main>
+    <div id="form-main">
+      <nav class="nav">
+          <a href="{{ route('posts.index') }}" class="nav-top">投稿アプリ</a>
+          <ul class="nav-list">
+              <li class="nav-item">
+                  <a href="{{ route('posts.create') }}">新規投稿</a>
+              </li>
+              <li class="nav-item">
+                  <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
+                      @csrf
+                      <a href="" onclick="event.preventDefault(); document.querySelector('#logout-form').submit();">ログアウト</a>
+                  </form>
+              </li>
+          </ul>
+      </nav>
+
+      <div id="form-index">
+        <a href="{{ route('posts.index') }}">&lt; 戻る</a>
+        <h1>投稿詳細</h1>
+
+        <article class="article">
+            <h2>{{ $post->title }}</h2>
+            <p>{{ $post->content }}</p>
+        </article>
+  </main>
+</body>
+
+</html>

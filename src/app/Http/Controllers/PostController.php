@@ -32,7 +32,7 @@ class PostController extends Controller
 
     public function store(StoreRequest $request)
     {
-                /**
+        /**
          * @var User $user
          */
         $user = Auth::user();
