@@ -15,7 +15,7 @@
         
         <div class="input-div">
           <label for="name" class="label-a">ユーザ名</label>
-          <input name="user_name" type="text" class="input-a" id="user_name" />
+          <input name="user_name" type="text" class="input-a" id="user_name" value="{{ old('user_name') }}"  />
           @if($errors->has('user_name'))
             <span class="error">{{ $errors->first('user_name') }}</span>
           @endif 
@@ -23,7 +23,7 @@
 
         <div class="input-div">
           <label for="email" class="label-a">メールアドレス</label>
-          <input name="email" type="email" class="input-a" id="email" />
+          <input name="email" type="email" class="input-a" id="email" value="{{ old('email') }}" />
           @if($errors->has('email'))
           <span class="error">{{ $errors->first('email') }}</span>
           @endif 
