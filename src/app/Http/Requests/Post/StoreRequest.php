@@ -43,6 +43,14 @@ class StoreRequest extends FormRequest
         return $validate;
     }
 
+    public function attributes(): array
+    {
+        return [
+            'title' => 'タイトル',
+            'content' => '投稿内容',
+        ];
+    }
+
     public function getPostTitle(): string
     {
         return $this['title'];

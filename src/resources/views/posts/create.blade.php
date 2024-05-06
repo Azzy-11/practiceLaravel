@@ -36,14 +36,14 @@
                     <div>
                         <label for="title">タイトル</label>
                         <input type="text" id="title" name="title" class="input-a">
-                        @if($errors->has('email'))
+                        @if($errors->has('title'))
                         <span class="error">{{ $errors->first('title') }}</span>
                         @endif 
                     </div>
                     <div>
                         <label for="content">本文</label>
                         <textarea id="content" name="content" class="input-a"></textarea>
-                        @if($errors->has('email'))
+                        @if($errors->has('content'))
                         <span class="error">{{ $errors->first('content') }}</span>
                         @endif 
                     </div>
