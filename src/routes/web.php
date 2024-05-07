@@ -30,14 +30,18 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/login', [UserController::class, 'showLogin'])->name('login');
     Route::post('/login', [UserController::class, 'login']);
+
 });
-    
+
 Route::middleware('auth')->group(function(){
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('logout', [UserController::class, 'logout'])->name('user.logout');
-
+    
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::patch('/posts', [PostController::class, 'update'])->name('posts.update');
+    Route::get('/posts/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
 });
