@@ -1,53 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投稿一覧 | Meower</title>
-    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-</head>
+@section('title', '投稿一覧 | Meower')
+@section('h1', '投稿一覧')
 
-<body>
-    
-    <main>
-        <div id="form-main">
-            <nav class="nav">
-                <a href="{{ route('posts.index') }}" class="nav-top">投稿アプリ</a>
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="{{ route('posts.create') }}">新規投稿</a>
-                    </li>
-                    <li class="nav-item">
-                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
-                            @csrf
-                            <a href="" onclick="event.preventDefault(); document.querySelector('#logout-form').submit();">ログアウト</a>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-            <div id="form-index">
-                <h1>投稿一覧</h1>
-                
-                @if (session('flash_message'))
-                    <p>{{ session('flash_message') }}</p>
-                @endif
-        
-                @if($posts->isNotEmpty())
-                    @foreach($posts as $post)
-                        <article class="article">
-                            <h2 class="h2">{{ $post->title }}</h2>
-                            <p>{{ $post->content }}</p>
-                            <a href="{{ route('posts.show', $post) }}">詳細</a>
-                        </article>
-                    @endforeach
-                @else
-                    <p>投稿はありません。</p>
-                @endif
+@section('content')          
+    @if (session('flash_message'))
+        <p>{{ session('flash_message') }}</p>
+    @endif
 
-            </div>
-        </div>
-    </main>
-</body>
-
-</html>
+    @if($posts->isNotEmpty())
+        @foreach($posts as $post)
+            <article class="article">
+                <h2 class="h2">{{ $post->title }}</h2>
+                <p>{{ $post->content }}</p>
+                <a href="{{ route('posts.show', $post) }}">詳細</a>
+            </article>
+        @endforeach
+    @else
+        <p>投稿はありません。</p>
+    @endif
+@endsection
