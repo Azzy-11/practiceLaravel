@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\Post\StoreRequest;
-use App\Http\Requests\Post\EditRequest;
 use App\Http\Requests\Post\UpdateRequest;
 
 class PostController extends Controller
@@ -47,15 +46,17 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('flash_message', '投稿が完了しました。');
     }
 
-    public function edit(EditRequest $request)
+    public function edit(Post $post)
     {
-        $post = Post::query()->where('id', $request->getPostId())->first();
+        $this->authorize('edit', $post);
+
         return view('posts.edit', compact('post'));
     }
 
-    public function update(UpdateRequest $request,)
+    public function update(UpdateRequest $request, Post $post)
     {
-        $post = Post::query()->where('id', $request->getPostId())->first();
+        $this->authorize('update', $post);
+
         $post->update([
             'title' => $request->getPostTitle(),
             'content' => $request->getPostContent(),

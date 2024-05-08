@@ -37,7 +37,7 @@
                 <h2>{{ $post->title }}</h2>
                 <p>{{ $post->content }}</p>
                 @if ($post->user_id === Auth::id())
-                    <a href="{{ route('posts.edit', ['id' => $post->id]) }}">編集</a>
+                    <a href="{{ route('posts.edit', $post) }}">編集</a>
                 @endif
             </article>
     </main>

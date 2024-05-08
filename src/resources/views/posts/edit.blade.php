@@ -31,7 +31,7 @@
                 <a href="{{ route('posts.index') }}">&lt; 戻る</a>
                 <h1>新規編集</h1>
     
-                <form action="{{ route('posts.update', ['id' => $post->id]) }}" method="POST">
+                <form action="{{ route('posts.update', $post) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div>

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\IsSelfPost;
 
 class UpdateRequest extends FormRequest
 {
@@ -30,7 +29,6 @@ class UpdateRequest extends FormRequest
             'title' => [
                 'required',
                 'string',
-                new IsSelfPost(),
             ]
         ];
 
@@ -50,11 +48,6 @@ class UpdateRequest extends FormRequest
             'title' => 'タイトル',
             'content' => '投稿内容',
         ];
-    }
-
-    public function getPostId() : int 
-    {
-        return (int)$this['id'];
     }
 
     public function getPostTitle(): string
