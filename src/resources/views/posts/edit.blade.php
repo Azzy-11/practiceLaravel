@@ -21,6 +21,8 @@
             <span class="error">{{ $errors->first('content') }}</span>
             @endif 
         </div>
+        <input type="hidden" name="id" value="{{ $post->id }}">
+        <input type="hidden" name="auth_key" value="{{ $post->auth_key }}">
         <button type="submit" class="button">更新</button>
     </form>
 @endsection

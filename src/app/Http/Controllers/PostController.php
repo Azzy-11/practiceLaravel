@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -37,8 +38,10 @@ class PostController extends Controller
          * @var User $user
          */
         $user = Auth::user();
+        $auth_key = Str::random(16);
         Post::query()->create([
             'user_id' => $user->id,
+            'auth_key' => $auth_key,
             'title' => $request->getPostTitle(),
             'content' => $request->getPostContent(),
         ]);

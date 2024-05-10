@@ -23,7 +23,9 @@ class UserController extends Controller
     public function register(StoreRequest $request)
     {
         $verify_token = Str::random(10);
+        $auth_key = Str::random(16);
         User::query()->create([
+            'auth_key' => $auth_key,
             'user_name' => $request->getUserName(),
             'email' => $request->getEmail(),
             'password' => Hash::make($request->getPassword()),

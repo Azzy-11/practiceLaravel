@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\IsSelfPost;
 
 class UpdateRequest extends FormRequest
 {
@@ -24,6 +25,21 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         $validate = [];
+
+        $validate += [
+            'id' => [
+                'required',
+                'int',
+                new IsSelfPost($this->auth_key),
+            ]
+        ];
+
+        $validate += [
+            'title' => [
+                'required',
+                'string',
+            ]
+        ];
 
         $validate += [
             'title' => [

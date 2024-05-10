@@ -19,6 +19,15 @@ class Post extends Model
         'id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'auth_key',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

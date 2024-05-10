@@ -30,7 +30,6 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/login', [UserController::class, 'showLogin'])->name('login');
     Route::post('/login', [UserController::class, 'login']);
-
 });
 
 Route::middleware('auth')->group(function(){
